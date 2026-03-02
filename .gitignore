@@ -396,3 +396,6 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/platformio,vs,c++
+
+Packages/Dashboard/grafana-storage/plugins/
+.npm/

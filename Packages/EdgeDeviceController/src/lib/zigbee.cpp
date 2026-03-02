@@ -1,35 +1,42 @@
 #include <lib/zigbee.h>
 
-SoftwareSerial zigBeeSerial(ZIGBEE_RX_PIN, ZIGBEE_TX_PIN);
-bool isATMode = false;
+ZigBee::ZigBee() :
+    serial(SoftwareSerial(ZIGBEE_RX_PIN, ZIGBEE_TX_PIN)),
+    inConfigMode(false) {}
 
-void setupZigBee() {
-    zigBeeSerial.begin(ZIGBEE_SERIAL_BAULT);
+ZigBee::~ZigBee() {}
+
+void ZigBee::setup() {
+    this->serial.begin(ZIGBEE_SERIAL_BAULT);
 }
 
-void enableATMode() {
-    zigBeeSerial.println("+++");
+void ZigBee::enableConfigMode() {
+    this->serial.println("+++");
 
     delay(1000); // TODO remove this if possible
 
-    while (zigBeeSerial.available()) {} // TODO remove this if possible
+    while (this->serial.available()) {} // TODO remove this if possible
 
-    isATMode = true;
+    this->inConfigMode = true;
 }
 
-void setZigBeeParam(String name, String value) {
-    if (!isATMode) throw "You must enable the AT mode before";
+void ZigBee::setParam(String name, String value) {
+    if (!this->inConfigMode) throw "You must enable the AT mode before";
 
-    zigBeeSerial.print("AT" + name + value);
+    this->serial.print("AT" + name + value);
     delay(100); // TODO remove this if possible
 
-    while (zigBeeSerial.available()) {} // TODO remove this if possible
+
 }
 
-void getZigBeeParam(String name) {
-    // TODO
+String ZigBee::getParam(String name) {
+
 }
 
-void disableATMode() {
+void ZigBee::disableConfigMode() {
 
+}
+
+void ZigBee::waitUntilAvailable() {
+    while (this->serial.available()) {} // TODO remove this if possible
 }

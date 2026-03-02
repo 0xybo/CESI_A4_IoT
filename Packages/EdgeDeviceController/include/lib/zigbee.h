@@ -1,8 +1,21 @@
 #include <Arduino.h>
 #include <main.h>
 
-SoftwareSerial zigBeeSerial;
+class ZigBee {
+    SoftwareSerial serial;
+    bool inConfigMode;
 
-void setupZigBee();
+public:
+    ZigBee();
+    ~ZigBee();
 
-void setZigBeeParam(String name, String value);
+    void setup();
+
+    void enableConfigMode();
+    void setParam(String name, String value);
+    String getParam(String name);
+    void disableConfigMode();
+
+private:
+    void waitUntilAvailable();
+};
