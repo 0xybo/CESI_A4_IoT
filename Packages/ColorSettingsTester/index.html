@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Color Temperature Tester</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 2rem;
+			}
+			.slider-group {
+				margin-bottom: 1rem;
+			}
+			#colorBox {
+				width: 200px;
+				height: 200px;
+				border: 1px solid #ccc;
+				margin-top: 1rem;
+			}
+			.output {
+				margin-top: 0.5rem;
+			}
+			input[type='number'] {
+				width: 4rem;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Color Temperature &amp; Brightness Tester</h1>
+
+		<div class="slider-group">
+			<label for="temperature">Temperature (K): </label>
+			<input type="range" id="temperature" min="2500" max="6500" value="2500" step="1" />
+			<span id="tempVal">2500</span>
+		</div>
+		<div class="slider-group">
+			<label for="brightness">Brightness (%): </label>
+			<input type="range" id="brightness" min="0" max="100" value="100" />
+			<span id="brightVal">100</span>
+		</div>
+
+		<div id="colorBox"></div>
+		<div class="output">
+			<p>R: <span id="outR"></span></p>
+			<p>G: <span id="outG"></span></p>
+			<p>B: <span id="outB"></span></p>
+		</div>
+
+		<!-- spectre with min/max cursors -->
+		<h2>Color spectre</h2>
+		<p>Drag the vertical handles to choose minimum and maximum temperature bounds.</p>
+		<canvas id="curveCanvas" width="400" height="100" style="border: 1px solid #ccc"></canvas>
+		<p>Generated formula:</p>
+		<pre id="formula" style="background: #f0f0f0; padding: 0.5rem"></pre>
+
+		<script>
+			function mapFloat(x, in_min, in_max, out_min, out_max) {
+				if (in_max === in_min) return out_min; // avoid divide by zero
+				let result = ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+				if (out_max > out_min) {
+					if (result < out_min) result = out_min;
+					if (result > out_max) result = out_max;
+				} else {
+					if (result < out_max) result = out_max;
+					if (result > out_min) result = out_min;
+				}
+				return result;
+			}
+
+			function updateColor() {
+				let temperature = parseFloat(document.getElementById('temperature').value);
+				let brightness = parseFloat(document.getElementById('brightness').value);
+				let r, g, b;
+
+				// compute bounds from cursor positions
+				let minPos = cursorMin.x; // normalized 0..1
+				let maxPos = cursorMax.x;
+				if (minPos > maxPos) [minPos, maxPos] = [maxPos, minPos];
+
+				// map to kelvin range 2500–6500
+				let minTemp = 2500 + minPos * (6500 - 2500);
+				let maxTemp = 2500 + maxPos * (6500 - 2500);
+
+				// normalized position for spectre indicator
+				let norm = mapFloat(temperature, minTemp, maxTemp, 0, 1);
+				drawSpectre(norm);
+
+				// sample color from spectre gradient
+				let col = getSpectreColor();
+				r = col.r;
+				g = col.g;
+				b = col.b;
+				// apply brightness
+				let brightNorm = mapFloat(brightness, 0, 100, 0, 1);
+				r = Math.round(r * brightNorm);
+				g = Math.round(g * brightNorm);
+				b = Math.round(b * brightNorm);
+				document.getElementById('outR').textContent = r;
+				document.getElementById('outG').textContent = g;
+				document.getElementById('outB').textContent = b;
+				document.getElementById('colorBox').style.backgroundColor = `rgb(${r},${g},${b})`;
+
+				// update formula display
+				document.getElementById('formula').textContent = `hue = mapFloat(temp, ${minTemp.toFixed(1)}, ${maxTemp.toFixed(1)}, 0, 1) * 240`;
+			}
+
+			// attach slider listeners outside of updateColor
+			document.getElementById('temperature').addEventListener('input', (e) => {
+				document.getElementById('tempVal').textContent = e.target.value;
+				updateColor();
+			});
+
+			document.getElementById('brightness').addEventListener('input', (e) => {
+				document.getElementById('brightVal').textContent = e.target.value;
+				updateColor();
+			});
+
+			// spectre & cursor handling
+			const curveCanvas = document.getElementById('curveCanvas');
+			const curveCtx = curveCanvas.getContext('2d');
+			let cursorMin = { x: 0.25 };
+			let cursorMax = { x: 0.75 };
+			let draggingCursor = null;
+
+			function hslToRgb(h, s, l) {
+				const c = (1 - Math.abs(2 * l - 1)) * s;
+				const hp = h / 60;
+				const x = c * (1 - Math.abs((hp % 2) - 1));
+				let [r, g, b] = [0, 0, 0];
+				if (hp >= 0 && hp < 1) [r, g, b] = [c, x, 0];
+				else if (hp < 2) [r, g, b] = [x, c, 0];
+				else if (hp < 3) [r, g, b] = [0, c, x];
+				else if (hp < 4) [r, g, b] = [0, x, c];
+				else if (hp < 5) [r, g, b] = [x, 0, c];
+				else [r, g, b] = [c, 0, x];
+				const m = l - c / 2;
+				return [Math.round((r + m) * 255), Math.round((g + m) * 255), Math.round((b + m) * 255)];
+			}
+			// spectre stops (temperature in K and hex colors)
+			const spectreStops = [
+				{ t: 2500, color: '#d6bc28' },
+				{ t: 3000, color: '#ebdb5f' },
+				{ t: 3500, color: '#f8f2d2' },
+				{ t: 4000, color: '#fdfdf9' },
+				{ t: 4500, color: '#fefefe' },
+				{ t: 5000, color: '#e9f4ff' },
+				{ t: 5500, color: '#caebff' },
+				{ t: 6000, color: '#a8dffa' },
+				{ t: 6500, color: '#83caf2' }
+			];
+
+			function rgbToHsl(r, g, b) {
+				r /= 255;
+				g /= 255;
+				b /= 255;
+				let max = Math.max(r, g, b),
+					min = Math.min(r, g, b);
+				let h = 0,
+					s = 0,
+					l = (max + min) / 2;
+				if (max !== min) {
+					let d = max - min;
+					s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+					switch (max) {
+						case r:
+							h = (g - b) / d + (g < b ? 6 : 0);
+							break;
+						case g:
+							h = (b - r) / d + 2;
+							break;
+						case b:
+							h = (r - g) / d + 4;
+							break;
+					}
+					h /= 6;
+				}
+				return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
+			}
+			function hexToRgb(h) {
+				return {
+					r: parseInt(h.substr(1, 2), 16),
+					g: parseInt(h.substr(3, 2), 16),
+					b: parseInt(h.substr(5, 2), 16)
+				};
+			}
+			function rgbToHex(r, g, b) {
+				return '#' + [r, g, b].map((v) => v.toString(16).padStart(2, '0')).join('');
+			}
+			function interpColor(c0, c1, t) {
+				return {
+					r: Math.round(c0.r + (c1.r - c0.r) * t),
+					g: Math.round(c0.g + (c1.g - c0.g) * t),
+					b: Math.round(c0.b + (c1.b - c0.b) * t)
+				};
+			}
+			function getSpectreColor(norm) {
+				let temp = parseFloat(document.getElementById('temperature').value);
+				// find stops
+				let i;
+				for (i = 1; i < spectreStops.length; i++) {
+					if (temp <= spectreStops[i].t) break;
+				}
+				let prev = spectreStops[i - 1];
+				let next = spectreStops[i] || prev;
+				let frac = (temp - prev.t) / (next.t - prev.t || 1);
+				let c0 = hexToRgb(prev.color);
+				let c1 = hexToRgb(next.color);
+				return interpColor(c0, c1, frac);
+			}
+
+			function drawSpectre(tempNorm) {
+				curveCtx.clearRect(0, 0, curveCanvas.width, curveCanvas.height);
+				const grad = curveCtx.createLinearGradient(0, 0, curveCanvas.width, 0);
+				spectreStops.forEach((s, idx) => {
+					grad.addColorStop(idx / (spectreStops.length - 1), s.color);
+				});
+				curveCtx.fillStyle = grad;
+				curveCtx.fillRect(0, 0, curveCanvas.width, curveCanvas.height);
+				// min/max cursors
+				[
+					{ c: cursorMin, col: 'black' },
+					{ c: cursorMax, col: 'black' }
+				].forEach(({ c, col }) => {
+					const px = c.x * curveCanvas.width;
+					curveCtx.strokeStyle = col;
+					curveCtx.lineWidth = 2;
+					curveCtx.beginPath();
+					curveCtx.moveTo(px, 0);
+					curveCtx.lineTo(px, curveCanvas.height);
+					curveCtx.stroke();
+				});
+				// temperature indicator
+				if (typeof tempNorm == 'number') {
+					tempNorm = Math.max(0, Math.min(1, tempNorm));
+					// const px = tempNorm * curveCanvas.width + (curveCanvas.width / (6500 - 2500) * cursorMin.x);
+					const px = (cursorMin.x + tempNorm * (cursorMax.x - cursorMin.x)) * curveCanvas.width;
+					curveCtx.strokeStyle = `rgb(255,0,0)`;
+					curveCtx.lineWidth = 2;
+					curveCtx.beginPath();
+					curveCtx.moveTo(px, 0);
+					curveCtx.lineTo(px, curveCanvas.height);
+					curveCtx.stroke();
+				}
+			}
+
+			function updateSlider() {
+				let minPos = cursorMin.x;
+				let maxPos = cursorMax.x;
+				if (minPos > maxPos) [minPos, maxPos] = [maxPos, minPos];
+				const minK = Math.round(2500 + minPos * (6500 - 2500));
+				const maxK = Math.round(2500 + maxPos * (6500 - 2500));
+				const slider = document.getElementById('temperature');
+				slider.min = minK;
+				slider.max = maxK;
+				// clamp current value
+				if (slider.value < minK) slider.value = minK;
+				if (slider.value > maxK) slider.value = maxK;
+				document.getElementById('tempVal').textContent = slider.value;
+			}
+
+			curveCanvas.addEventListener('mousedown', (e) => {
+				const rect = curveCanvas.getBoundingClientRect();
+				const mx = e.clientX - rect.left;
+				const hit = 8;
+				if (Math.abs(mx - cursorMin.x * curveCanvas.width) < hit) draggingCursor = 'min';
+				else if (Math.abs(mx - cursorMax.x * curveCanvas.width) < hit) draggingCursor = 'max';
+			});
+			window.addEventListener('mousemove', (e) => {
+				if (!draggingCursor) return;
+				const rect = curveCanvas.getBoundingClientRect();
+				let mx = e.clientX - rect.left;
+				mx = Math.max(0, Math.min(curveCanvas.width, mx));
+				if (draggingCursor === 'min') cursorMin.x = mx / curveCanvas.width;
+				else cursorMax.x = mx / curveCanvas.width;
+				drawSpectre(); // update slider range to follow cursors
+				updateSlider();
+				updateColor();
+			});
+			window.addEventListener('mouseup', () => {
+				draggingCursor = null;
+			});
+
+			drawSpectre();
+
+			// initial update
+			updateSlider();
+			updateColor();
+		</script>
+	</body>
+</html>

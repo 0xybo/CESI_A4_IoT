@@ -1,4 +1,11 @@
+#pragma once
 #include <Arduino.h>
+
+// ╭────────────────────────────────────────────────────────╮
+// │                         SERIAL                         │
+// ╰────────────────────────────────────────────────────────╯
+
+#define SERIAL_BAUD 9600
 
 // ╭────────────────────────────────────────────────────────╮
 // │                         ZIGBEE                         │
@@ -6,27 +13,31 @@
 
 #define ZIGBEE_RX_PIN UART2_RX_PIN
 #define ZIGBEE_TX_PIN UART2_TX_PIN
-#define ZIGBEE_SERIAL_BAULT 9600
+#define ZIGBEE_SERIAL_BAUD 9600
 
 // ╭────────────────────────────────────────────────────────╮
 // │                         BUTTON                         │
 // ╰────────────────────────────────────────────────────────╯
 
-#define BUTTON_1_PIN D4
-#define BUTTON_2_PIN D5
+#define BUTTON_OFF_PIN D2
+#define BUTTON_ON_PIN D3
+#define DEBOUNCE_DELAY 50 // milliseconds
+#define MAX_BUTTONS 2
 
 // ╭────────────────────────────────────────────────────────╮
 // │                       LUMINOSITY                       │
 // ╰────────────────────────────────────────────────────────╯
 
-#define LUMINOSITY_PIN A0
+#define LIGHT_SENSOR_PIN A0
 
 // ╭────────────────────────────────────────────────────────╮
 // │                          LED                           │
 // ╰────────────────────────────────────────────────────────╯
 
-#define LED_CLK_PIN D2
-#define LED_DATA_PIN D3 
+#define LED_CLK_PIN D4
+#define LED_DATA_PIN D5 
+#define LED_QUANTITY 1
+#define LED_NUMBER 0
 
 // ╭────────────────────────────────────────────────────────╮
 // │                          RTC                           │
