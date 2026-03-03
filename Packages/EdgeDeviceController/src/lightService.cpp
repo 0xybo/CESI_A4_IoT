@@ -11,11 +11,17 @@ bool LightService::enabled = true;
 void LightService::loop(int index) {
     if (!LightService::enabled) return;
 
+    int minTemperature = 20; 
+    int maxTemperature = 60;
+
+    int minBrightness = 20;
+    int maxBrightness = 80;
+
     float lightLevel = LightService::lightSensor.read();
     float currentTemperature = LightService::led.getTemperature();
     float currentBrightness = LightService::led.getBrightness();
-    float targetTemperature = lightLevel;
-    float targetBrightness = 100 - lightLevel;
+    float targetTemperature = constrain(lightLevel, minTemperature, maxTemperature);
+    float targetBrightness = constrain((100 - lightLevel), minBrightness, maxBrightness);
     float nextTemperature = currentTemperature + (targetTemperature - currentTemperature) * 0.02; // Smooth transition
     float nextBrightness = currentBrightness + (targetBrightness - currentBrightness) * 0.02; // Smooth transition
 
@@ -29,7 +35,7 @@ void LightService::loop(int index) {
         Serial.print("%");
         Serial.print(" | LED currentTemperature: ");
         Serial.print(LightService::led.getTemperature());
-        Serial.println("°C");
+        Serial.println("%");
     }
 
     LightService::led.setTemperatureAndBrightness(nextTemperature, nextBrightness);

@@ -1,23 +1,8 @@
 #include <lib/led.h>
 
 ChainableLED Led::led = ChainableLED(LED_CLK_PIN, LED_DATA_PIN, LED_QUANTITY);
-float Led::brightness = 0;
-float Led::temperature = 0;
-
-// void Led::updateColor() {
-//     float hue = Led::temperature > 50 ? 20 / 360. : 240 / 360.;
-//     float saturation = 1;
-//     float lightness =
-//         mapFloat(absFloat(Led::temperature - 50), 0, 50, 0, 1) *
-//         mapFloat(Led::brightness, 0, 100, 0, 1);
-
-//     Led::led.setColorHSL(
-//         LED_NUMBER,
-//         hue,
-//         saturation,
-//         lightness
-//     );
-// }
+float Led::brightness = 50;
+float Led::temperature = 50;
 
 void Led::updateColor() {
     float r, g, b;
