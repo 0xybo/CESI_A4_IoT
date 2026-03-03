@@ -7,6 +7,7 @@
 #include <lib/lightSensor.h>
 #include <lib/switchButton.h>
 #include <lib/led.h>
+#include <lib/zigBee.h>
 #include <lightService.h>
 
 void setup();

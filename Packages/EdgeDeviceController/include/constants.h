@@ -14,6 +14,10 @@
 #define ZIGBEE_RX_PIN UART2_RX_PIN
 #define ZIGBEE_TX_PIN UART2_TX_PIN
 #define ZIGBEE_SERIAL_BAUD 9600
+#define ZIGBEE_API_ENABLED "2"
+#define ZIGBEE_COORDINATOR "0"
+#define ZIGBEE_PAN_ID "1234"
+#define ZIGBEE_CHANNELS "D5E3" // Scan channels 11-26 (0x07FFF800)
 
 // ╭────────────────────────────────────────────────────────╮
 // │                         BUTTON                         │

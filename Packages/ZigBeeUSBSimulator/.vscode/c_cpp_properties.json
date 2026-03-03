@@ -8,9 +8,10 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "C:/Users/godie/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/include",
-                "C:/Users/godie/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/src",
-                "C:/Users/godie/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/.pio/libdeps/uno_r4_wifi/simple-zigbee",
+                "D:/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/include",
+                "D:/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/src",
+                "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/SoftwareSerial/src",
+                "D:/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/.pio/libdeps/uno_r4_wifi/XBee",
                 "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/cores/arduino/tinyusb",
                 "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/cores/arduino",
                 "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/cores/arduino/api/deprecated",
@@ -33,7 +34,6 @@
                 "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/SDU/src",
                 "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/SPI",
                 "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/SoftwareATSE/src",
-                "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/SoftwareSerial/src",
                 "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/Storage",
                 "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/WDT/src",
                 "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/WiFiS3/src",
@@ -43,9 +43,10 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "C:/Users/godie/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/include",
-                    "C:/Users/godie/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/src",
-                    "C:/Users/godie/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/.pio/libdeps/uno_r4_wifi/simple-zigbee",
+                    "D:/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/include",
+                    "D:/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/src",
+                    "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/SoftwareSerial/src",
+                    "D:/Cours/12. CESI A4/IoT - Systèmes communicants/Projet/CESI_A4_IoT/Packages/ZigBeeUSBSimulator/.pio/libdeps/uno_r4_wifi/XBee",
                     "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/cores/arduino/tinyusb",
                     "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/cores/arduino",
                     "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/cores/arduino/api/deprecated",
@@ -68,7 +69,6 @@
                     "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/SDU/src",
                     "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/SPI",
                     "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/SoftwareATSE/src",
-                    "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/SoftwareSerial/src",
                     "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/Storage",
                     "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/WDT/src",
                     "C:/Users/godie/.platformio/packages/framework-arduinorenesas-uno/libraries/WiFiS3/src",
