@@ -14,6 +14,6 @@ private:
 
 public:
     static void setup(LightSensor& lightSensor, Clock& clock, Led& led);
-    static void loop();
+    static void loop(int index);
     static void setEnabled(bool enabled);
 };

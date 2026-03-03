@@ -22,11 +22,13 @@ void setup() {
 }
 
 void loop() {
-    delay(100);
-    // Serial.print(Clock::getFormattedDatetime());
-    // Serial.print(' ');
-    // Serial.println(LightSensor::read());
+    static int index = 0;
+    if (index++ % 100 == 0) {
+        index = 0;
+    }
 
-    SwitchButton::loop();
-    LightService::loop();
+    SwitchButton::loop(index);
+    LightService::loop(index);
+
+    delay(10);
 }

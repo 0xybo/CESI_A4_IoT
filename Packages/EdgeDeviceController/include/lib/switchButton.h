@@ -28,5 +28,5 @@ public:
      * function only once per button instance.
      */
     static void onPress(void (*callback)(bool active));
-    static void loop();
+    static void loop(int index);
 };

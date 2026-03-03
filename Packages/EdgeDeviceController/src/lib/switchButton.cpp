@@ -37,7 +37,7 @@ void SwitchButton::onPress(void (*callback)(bool active)) {
     SwitchButton::callback = callback;
 }
 
-void SwitchButton::loop() {
+void SwitchButton::loop(int index) {
     if (SwitchButton::hasBeenPressed && SwitchButton::callback != nullptr) {
         SwitchButton::callback(SwitchButton::active);
         SwitchButton::hasBeenPressed = false;
