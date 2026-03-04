@@ -14,7 +14,7 @@ void setup() {
             Serial.print(F("Switch is now "));
             Serial.println(active ? F("active") : F("inactive"));
             LightService::setEnabled(active);
-            if (!active) Led::setTemperatureAndBrightness(0, 0);
+            if (!active) Led::setBrightness(0); // Turn off LED when switch is inactive
         }
     );
 
