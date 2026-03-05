@@ -3,9 +3,18 @@ datasources:
   - name: InfluxDB
     type: influxdb
     access: proxy
-    database: db0
-    user: admin
-    password: admin
     url: http://influxdb:8086
     isDefault: true
     editable: true
+
+    basicAuth: true
+    basicAuthUser: BigBossIoT
+    basicAuthPassword: BigBossIoT1234
+
+    jsonData:
+      version: Flux
+      organization: TestOrg
+      defaultBucket: TestBucket
+      tlsSkipVerify: true
+
+    secureJsonData: {}
