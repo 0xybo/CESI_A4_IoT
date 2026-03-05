@@ -1,0 +1,3 @@
+[submodule "Packages/EdgeDeviceController/lib/ChainableLED"]
+	path = Packages/EdgeDeviceController/lib/ChainableLED
+	url = https://github.com/pjpmarques/ChainableLED
