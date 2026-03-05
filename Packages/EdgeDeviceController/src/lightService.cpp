@@ -1,9 +1,13 @@
 #include <lightService.h>
 
+int LightService::weather[2] = { 1, 1 };
+
 void LightService::setup(LightSensor& lightSensor, Clock& clock, Led& led) {
     LightService::lightSensor = lightSensor;
     LightService::clock = clock;
     LightService::led = led;
+
+    updateLed();
 }
 
 bool LightService::enabled = true;
@@ -11,7 +15,26 @@ bool LightService::enabled = true;
 void LightService::loop(int index) {
     if (!LightService::enabled) return;
 
-    int minTemperature = 20; 
+    LightService::updateLed();
+
+    // Serial.print(Clock::getFormattedDatetime());
+    // Serial.print(" Light level: ");
+    // Serial.print(LightService::lightSensor.read());
+    // Serial.print("%");
+    // Serial.print(" | Weather : ");
+    // Serial.print(weather[0]);
+    // Serial.print(",");
+    // Serial.print(weather[1]);
+    // Serial.print(" | LED currentBrightness: ");
+    // Serial.print(LightService::led.getBrightness());
+    // Serial.print("%");
+    // Serial.print(" | LED currentTemperature: ");
+    // Serial.print(LightService::led.getTemperature());
+    // Serial.println("%");
+}
+
+void LightService::updateLed() {
+    int minTemperature = 20;
     int maxTemperature = 60;
 
     int minBrightness = 20;
@@ -25,22 +48,14 @@ void LightService::loop(int index) {
     float nextTemperature = currentTemperature + (targetTemperature - currentTemperature) * 0.02; // Smooth transition
     float nextBrightness = currentBrightness + (targetBrightness - currentBrightness) * 0.02; // Smooth transition
 
-    if (index % 10 == 0) { // Log every 10 iterations (every 100ms if loop runs every 10ms)
-        Serial.print(Clock::getFormattedDatetime());
-        Serial.print(" Light level: ");
-        Serial.print(lightLevel);
-        Serial.print("%");
-        Serial.print(" | LED currentBrightness: ");
-        Serial.print(LightService::led.getBrightness());
-        Serial.print("%");
-        Serial.print(" | LED currentTemperature: ");
-        Serial.print(LightService::led.getTemperature());
-        Serial.println("%");
-    }
-
     LightService::led.setTemperatureAndBrightness(nextTemperature, nextBrightness);
 }
 
 void LightService::setEnabled(bool enabled) {
     LightService::enabled = enabled;
+}
+
+void LightService::setWeather(int morning, int afternoon) {
+    weather[0] = morning;
+    weather[1] = afternoon;
 }

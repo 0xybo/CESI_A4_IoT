@@ -2,7 +2,7 @@
 
 void (*SwitchButton::callback)(bool active) = nullptr;
 bool SwitchButton::hasBeenPressed = false;
-bool SwitchButton::active = false;
+bool SwitchButton::active = true;
 
 void SwitchButton::buttonOnPress() {
     if (SwitchButton::active || SwitchButton::hasBeenPressed) return; // Debounce: Ignore if already active
