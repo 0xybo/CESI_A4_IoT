@@ -15,10 +15,9 @@ private:
     // address of the coordinator (all zeroes)
     static constexpr XBeeAddress64 COORDINATOR_ADDR = XBeeAddress64(0x00000000, 0x00000000);
 
-    static void sendATCommand(const char* command,
-        const uint8_t* parameter = nullptr,
-        uint8_t paramLen = 0);
-    static void dumpSettings(const char* settings[]);
+    static void startParamSession();
+    static void setParam(const char* command, const char* paramater);
+    static void endParamSession();
 
     static void processPacket();
     static void handleRxPacket(ZBRxResponse& resp);
@@ -45,7 +44,7 @@ public:
 // packets; topics and payloads are seperated by a ':' character.
 class Cloud {
 public:
-    using Callback = void (*)(const XBeeAddress64& sender, uint8_t* payload, uint8_t length);
+    using Callback = void (*)(XBeeAddress64& sender, uint8_t* payload, uint8_t length);
 
 private:
     struct Subscription {
@@ -58,7 +57,7 @@ private:
 
     // called from ZigBee::handleRxPacket when a packet arrives
     friend class ZigBee;
-    static void deliver(const XBeeAddress64& sender, uint8_t* payload, uint8_t length);
+    static void deliver(XBeeAddress64& sender, uint8_t* payload, uint8_t length);
 
 public:
     static void setup();

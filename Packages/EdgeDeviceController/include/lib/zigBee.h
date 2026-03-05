@@ -15,8 +15,9 @@ private:
     // address of the coordinator (all zeroes)
     static constexpr XBeeAddress64 COORDINATOR_ADDR = XBeeAddress64(0x00000000, 0x00000000);
 
-    static void sendATCommand(const char* command, const char* parameter = nullptr);
-    static void dumpSettings(const char* settings[]);
+    static void startParamSession();
+    static void setParam(const char* command, const char* paramater);
+    static void endParamSession();
 
     static void processPacket();
     static void handleRxPacket(ZBRxResponse& resp);

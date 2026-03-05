@@ -13,7 +13,7 @@
 #define ZIGBEE_SERIAL_BAUD 9600
 #define ZIGBEE_API_ENABLED "2"
 #define ZIGBEE_COORDINATOR "1"
-#define ZIGBEE_PAN_ID "1234"
+#define ZIGBEE_PAN_ID "666"
 #define ZIGBEE_CHANNELS "D5E3" // Scan channels 11-26 (0x07FFF800)
 
 // ╭────────────────────────────────────────────────────────╮

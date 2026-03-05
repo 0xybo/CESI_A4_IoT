@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include <DS1307.h>
 #include <constants.h>
+#include <time.h>
 
 // ╭────────────────────────────────────────────────────────╮
 // │                        DATETIME                        │
@@ -24,6 +25,11 @@ public:
         int minutes,
         int seconds
     );
+
+    Datetime(unsigned long long timestamp);
+
+    unsigned long long toTimestamp();
+    String getFormattedDatetime();
 };
 
 // ╭────────────────────────────────────────────────────────╮
@@ -73,6 +79,6 @@ public:
      */
     static void setDatetime(Datetime& datetime);
     static Datetime getDatetime();
-    static unsigned long getTimestamp();
+    static unsigned long long getTimestamp();
     static String getFormattedDatetime();
 };

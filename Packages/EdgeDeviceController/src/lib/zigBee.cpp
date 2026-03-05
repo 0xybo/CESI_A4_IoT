@@ -8,81 +8,65 @@ XBee ZigBee::xbee;
 Cloud::Subscription Cloud::subscriptions[10];
 uint8_t Cloud::subscriptionCount = 0;
 
-// ---------------------------------------------------------------------------
-// ZigBee private helpers
-// ---------------------------------------------------------------------------
-
-void ZigBee::sendATCommand(const char* command, const char* parameter) {
-    // library API expects non-const pointers
-    AtCommandRequest req((uint8_t*)command, (uint8_t*)parameter, parameter == nullptr ? 0 : strlen(parameter));
-    xbee.send(req);
-    // consume response if available (optional)
-    xbee.readPacket(500);
-    if (xbee.getResponse().getApiId() == AT_COMMAND_RESPONSE) {
-        AtCommandResponse resp;
-        xbee.getResponse().getAtCommandResponse(resp);
-        Serial.print("AT ");
-        Serial.print(command);
-        Serial.print(' ');
-        Serial.print(parameter);
-        Serial.print(" status=0x");
-        Serial.print(resp.getStatus(), HEX);
-        uint8_t* value = resp.getValue();
-        int length = resp.getValueLength();
-        if (length) {
-            Serial.print(" value=");
-            for (uint8_t i = 0; i < length; i++) {
-                Serial.print((char)(value[i]));
-            }
-        }
-        Serial.println();
+void ZigBee::startParamSession() {
+    serial.print("+++");
+    delay(1000);
+    while (serial.available()) {
+        serial.read();
     }
 }
 
-void ZigBee::dumpSettings(const char* settings[]) {
-    Serial.println("Current XBee Settings:");
-    for (size_t i = 0; settings[i] != nullptr; ++i) {
-        sendATCommand(settings[i]);
-        delay(100);
+void ZigBee::setParam(const char* command, const char* parameter) {
+    serial.print("AT");
+    serial.print(command);
+    serial.println(parameter);
+    delay(100);
+    while (serial.available()) {
+        serial.read();
     }
+}
+
+void ZigBee::endParamSession() {
+    serial.println("ATCN");
+    delay(100);
 }
 
 void ZigBee::processPacket() {
     XBeeResponse& rsp = xbee.getResponse();
     switch (rsp.getApiId()) {
-    case ZB_RX_RESPONSE: {
-        ZBRxResponse rx;
-        rsp.getZBRxResponse(rx);
-        handleRxPacket(rx);
-        break;
-    }
-    case ZB_TX_STATUS_RESPONSE: {
-        ZBTxStatusResponse tx;
-        rsp.getZBTxStatusResponse(tx);
-        handleTxStatus(tx);
-        break;
-    }
-    case AT_COMMAND_RESPONSE: {
-        AtCommandResponse at;
-        rsp.getAtCommandResponse(at);
-        handleATResponse(at);
-        break;
-    }
-    case REMOTE_AT_COMMAND_RESPONSE: {
-        RemoteAtCommandResponse rat;
-        rsp.getRemoteAtCommandResponse(rat);
-        handleRemoteATResponse(rat);
-        break;
-    }
-    case MODEM_STATUS_RESPONSE: {
-        ModemStatusResponse ms;
-        rsp.getModemStatusResponse(ms);
-        handleModemStatus(ms);
-        break;
-    }
-    default:
-        handleUnknownPacket();
-        break;
+        case ZB_RX_RESPONSE: {
+                ZBRxResponse rx;
+                rsp.getZBRxResponse(rx);
+                handleRxPacket(rx);
+                break;
+            }
+        case ZB_TX_STATUS_RESPONSE: {
+                ZBTxStatusResponse tx;
+                rsp.getZBTxStatusResponse(tx);
+                handleTxStatus(tx);
+                break;
+            }
+        case AT_COMMAND_RESPONSE: {
+                AtCommandResponse at;
+                rsp.getAtCommandResponse(at);
+                handleATResponse(at);
+                break;
+            }
+        case REMOTE_AT_COMMAND_RESPONSE: {
+                RemoteAtCommandResponse rat;
+                rsp.getRemoteAtCommandResponse(rat);
+                handleRemoteATResponse(rat);
+                break;
+            }
+        case MODEM_STATUS_RESPONSE: {
+                ModemStatusResponse ms;
+                rsp.getModemStatusResponse(ms);
+                handleModemStatus(ms);
+                break;
+            }
+        default:
+            handleUnknownPacket();
+            break;
     }
 }
 
@@ -141,74 +125,20 @@ void ZigBee::setup() {
     xbee.begin(serial);
 
     // configure a few default AT parameters
-    // sendATCommand("AP", ZIGBEE_API_ENABLED);
-    // sendATCommand("CE", ZIGBEE_COORDINATOR);
-    // sendATCommand("ID", ZIGBEE_PAN_ID);
-    // sendATCommand("SC", ZIGBEE_CHANNELS);
+    startParamSession();
+    setParam("AP", ZIGBEE_API_ENABLED);
+    setParam("CE", ZIGBEE_COORDINATOR);
+    setParam("ID", ZIGBEE_PAN_ID);
+    setParam("SC", ZIGBEE_CHANNELS);
+    endParamSession();
 
-    Serial.println("Mode +++");
-    serial.print("+++");           // Passage en mode AT
-    delay(1000);                       // Attendre OK
-    while (serial.available()) {
-        Serial.write(serial.read());
-    }
-
-    Serial.println("Modification ID");
-    serial.print("ATID");
-    serial.println(ZIGBEE_PAN_ID);
-    delay(100);
-    while (serial.available()) {
-        Serial.write(serial.read());
-    }
-    Serial.println();
-
-    Serial.println("Modification CE");
-    serial.print("ATCE");
-    serial.println(ZIGBEE_COORDINATOR);
-    delay(100);
-    while (serial.available()) {
-        Serial.write(serial.read());
-    }
-    Serial.println();
-
-    Serial.println("Modification AP");
-    serial.print("ATAP");
-    serial.println(ZIGBEE_API_ENABLED);
-    delay(100);
-    while (serial.available()) {
-        Serial.write(serial.read());
-    }
-    Serial.println();
-
-    Serial.println("Modification SC");
-    serial.print("ATSC");
-    serial.println(ZIGBEE_CHANNELS);
-    delay(100);
-    while (serial.available()) {
-        Serial.write(serial.read());
-    }
-    Serial.println();
-
-    serial.println("ATCN");  // Quitter le mode AT
-    delay(100);
-
-    delay(200);
     Serial.println("ZigBee setup complete");
-
-    const char* settings[] = { "AP","CE","ID","SC", nullptr };
-    dumpSettings(settings);
 }
 
 void ZigBee::loop(int index) {
     xbee.readPacket();
-    if (xbee.getResponse().isAvailable()) {
+    if (xbee.getResponse().isAvailable())
         processPacket();
-    }
-
-    if (index == 0) {
-        send("Hello from router!");
-        Serial.println("Sent: Hello from router!");
-    }
 }
 
 void ZigBee::send(const XBeeAddress64& address, uint8_t* payload, uint8_t length) {
