@@ -1,5 +1,5 @@
 /**
- * This is the default settings file provided by Node-RED.
+ * Node-RED Settings created at Tue, 27 Jan 2026 10:36:32 GMT
  *
  * It can contain any valid JavaScript code that will get run when Node-RED
  * is started.
@@ -32,7 +32,7 @@ module.exports = {
  ******************************************************************************/
 
     /** The file containing the flows. If not set, defaults to flows_<hostname>.json **/
-    flowFile: 'flows.json',
+    flowFile: "flows.json",
 
     /** By default, credentials are encrypted in storage using a generated key. To
      * specify your own secret, set the following property.
@@ -41,7 +41,7 @@ module.exports = {
      * node-red from being able to decrypt your existing credentials and they will be
      * lost.
      */
-    //credentialSecret: "a-secret-key",
+    //credentialSecret: "",
 
     /** By default, the flow JSON will be formatted over multiple lines making
      * it easier to compare changes when using version control.
@@ -73,14 +73,17 @@ module.exports = {
     /** To password protect the Node-RED editor and admin API, the following
      * property can be used. See https://nodered.org/docs/security.html for details.
      */
-    //adminAuth: {
-    //    type: "credentials",
-    //    users: [{
-    //        username: "admin",
-    //        password: "$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.",
-    //        permissions: "*"
-    //    }]
-    //},
+
+    adminAuth: {
+        "type": "credentials",
+        "users": [
+            {
+                "username": "samuel",
+                "password": "$2y$08$1N.IJw5.WFoYPx5xgqA2.u7YfmD2yFIl5dipM5IS.eX4dsT6/pxqm",
+                "permissions": "*"
+            }
+        ]
+    },
 
     /** The following property can be used to enable HTTPS
      * This property can be either an object, containing both a (private) key
@@ -226,7 +229,7 @@ module.exports = {
     /** When httpAdminRoot is used to move the UI to a different root path, the
      * following property can be used to identify a directory of static content
      * that should be served at http://localhost:1880/.
-     * When httpStaticRoot is set differently to httpAdminRoot, there is no need
+     * When httpStaticRoot is set differently to httpAdminRoot, there is no need 
      * to move httpAdminRoot
      */
     //httpStatic: '/home/nol/node-red-static/', //single static source
@@ -239,12 +242,12 @@ module.exports = {
      *  set a default cors policy across all static routes.
      */
     //httpStatic: [
-    //    {path: '/home/nol/pics/',    root: "/img/"},
-    //    {path: '/home/nol/reports/', root: "/doc/"},
+    //    {path: '/home/nol/pics/',    root: "/img/"}, 
+    //    {path: '/home/nol/reports/', root: "/doc/"}, 
     //    {path: '/home/nol/videos/',  root: "/vid/", options: {maxAge: '1d'}}
     //],
 
-    /**
+    /**  
      * All static routes will be appended to httpStaticRoot
      * e.g. if httpStatic = "/home/nol/docs" and  httpStaticRoot = "/static/"
      *      then "/home/nol/docs" will be served at "/static/"
@@ -281,11 +284,11 @@ module.exports = {
  *  - externalModules
  ******************************************************************************/
 
-    /** Uncomment the following to run node-red in your preferred language.
-     * Available languages include: en-US (default), ja, de, zh-CN, zh-TW, ru, ko
-     * Some languages are more complete than others.
-     */
-    // lang: "de",
+     /** Uncomment the following to run node-red in your preferred language.
+      * Available languages include: en-US (default), ja, de, zh-CN, zh-TW, ru, ko
+      * Some languages are more complete than others.
+      */
+     // lang: "de",
 
     /** Configure diagnostics options
      * - enabled:  When `enabled` is `true` (or unset), diagnostics data will
@@ -321,64 +324,65 @@ module.exports = {
          * telemetry without seeking further consent in the editor.
          * The user can override this setting via the user settings dialog within the editor
          */
-        // enabled: true,
+        
+        enabled: false,
         /**
          * If telemetry is enabled, the editor will notify the user if a new version of Node-RED
          * is available. Set the following property to false to disable this notification.
          */
         // updateNotification: true
     },
-    /** Configure the logging output */
-    logging: {
-        /** Only console logging is currently supported */
-        console: {
-            /** Level of logging to be recorded. Options are:
-             * fatal - only those errors which make the application unusable should be recorded
-             * error - record errors which are deemed fatal for a particular request + fatal errors
-             * warn - record problems which are non fatal + errors + fatal errors
-             * info - record information about the general running of the application + warn + error + fatal errors
-             * debug - record information which is more verbose than info + info + warn + error + fatal errors
-             * trace - record very detailed logging + debug + info + warn + error + fatal errors
-             * off - turn off all logging (doesn't affect metrics or audit)
-             */
-            level: "info",
-            /** Whether or not to include metric events in the log output */
-            metrics: false,
-            /** Whether or not to include audit events in the log output */
-            audit: false
-        }
-    },
+     /** Configure the logging output */
+     logging: {
+         /** Only console logging is currently supported */
+         console: {
+             /** Level of logging to be recorded. Options are:
+              * fatal - only those errors which make the application unusable should be recorded
+              * error - record errors which are deemed fatal for a particular request + fatal errors
+              * warn - record problems which are non fatal + errors + fatal errors
+              * info - record information about the general running of the application + warn + error + fatal errors
+              * debug - record information which is more verbose than info + info + warn + error + fatal errors
+              * trace - record very detailed logging + debug + info + warn + error + fatal errors
+              * off - turn off all logging (doesn't affect metrics or audit)
+              */
+             level: "info",
+             /** Whether or not to include metric events in the log output */
+             metrics: false,
+             /** Whether or not to include audit events in the log output */
+             audit: false
+         }
+     },
 
-    /** Context Storage
-     * The following property can be used to enable context storage. The configuration
-     * provided here will enable file-based context that flushes to disk every 30 seconds.
-     * Refer to the documentation for further options: https://nodered.org/docs/api/context/
-     */
-    //contextStorage: {
-    //    default: {
-    //        module:"localfilesystem"
-    //    },
-    //},
+     /** Context Storage
+      * The following property can be used to enable context storage. The configuration
+      * provided here will enable file-based context that flushes to disk every 30 seconds.
+      * Refer to the documentation for further options: https://nodered.org/docs/api/context/
+      */
+     //contextStorage: {
+     //    default: {
+     //        module:"localfilesystem"
+     //    },
+     //},
 
-    /** `global.keys()` returns a list of all properties set in global context.
-     * This allows them to be displayed in the Context Sidebar within the editor.
-     * In some circumstances it is not desirable to expose them to the editor. The
-     * following property can be used to hide any property set in `functionGlobalContext`
-     * from being list by `global.keys()`.
-     * By default, the property is set to false to avoid accidental exposure of
-     * their values. Setting this to true will cause the keys to be listed.
-     */
-    exportGlobalContextKeys: false,
+     /** `global.keys()` returns a list of all properties set in global context.
+      * This allows them to be displayed in the Context Sidebar within the editor.
+      * In some circumstances it is not desirable to expose them to the editor. The
+      * following property can be used to hide any property set in `functionGlobalContext`
+      * from being list by `global.keys()`.
+      * By default, the property is set to false to avoid accidental exposure of
+      * their values. Setting this to true will cause the keys to be listed.
+      */
+     exportGlobalContextKeys: false,
 
-    /** Configure how the runtime will handle external npm modules.
-     * This covers:
-     *  - whether the editor will allow new node modules to be installed
-     *  - whether nodes, such as the Function node are allowed to have their
-     * own dynamically configured dependencies.
-     * The allow/denyList options can be used to limit what modules the runtime
-     * will install/load. It can use '*' as a wildcard that matches anything.
-     */
-    externalModules: {
+     /** Configure how the runtime will handle external npm modules.
+      * This covers:
+      *  - whether the editor will allow new node modules to be installed
+      *  - whether nodes, such as the Function node are allowed to have their
+      * own dynamically configured dependencies.
+      * The allow/denyList options can be used to limit what modules the runtime
+      * will install/load. It can use '*' as a wildcard that matches anything.
+      */
+     externalModules: {
         // autoInstall: false,   /** Whether the runtime will attempt to automatically install missing modules */
         // autoInstallRetry: 30, /** Interval, in seconds, between reinstall attempts */
         // palette: {              /** Configuration for the Palette Manager */
@@ -395,7 +399,7 @@ module.exports = {
         //     allowList: [],
         //     denyList: []
         // }
-    },
+     },
 
 
 /*******************************************************************************
@@ -419,7 +423,7 @@ module.exports = {
          * See https://github.com/node-red-contrib-themes/theme-collection for
          * a collection of themes to chose from.
          */
-        //theme: "",
+        theme: "monokai",
 
         /** To disable the 'Welcome to Node-RED' tour that is displayed the first
          * time you access the editor for each release of Node-RED, set this to false
@@ -434,10 +438,9 @@ module.exports = {
              */
             //categories: ['subflows', 'common', 'function', 'network', 'sequence', 'parser', 'storage'],
         },
-
         projects: {
             /** To enable the Projects feature, set this value to true */
-            enabled: false,
+            enabled: true,
             workflow: {
                 /** Set the default projects workflow mode.
                  *  - manual - you must manually commit changes
@@ -445,7 +448,7 @@ module.exports = {
                  * This can be overridden per-user from the 'Git config'
                  * section of 'User Settings' within the editor
                  */
-                mode: "manual"
+                mode: "auto"
             }
         },
 
@@ -461,7 +464,7 @@ module.exports = {
                  * packages/node_modules/@node-red/editor-client/src/vendor/monaco/dist/theme
                  * e.g. "tomorrow-night", "upstream-sunburst", "github", "my-theme"
                  */
-                // theme: "vs",
+                //theme: "vs",
                 /** other overrides can be set e.g. fontSize, fontFamily, fontLigatures etc.
                  * for the full list, see https://microsoft.github.io/monaco-editor/docs.html#interfaces/editor.IStandaloneEditorConstructionOptions.html
                  */
@@ -470,7 +473,6 @@ module.exports = {
                 //fontLigatures: true,
             }
         },
-
         markdownEditor: {
             mermaid: {
                 /** enable or disable mermaid diagram in markdown document
@@ -490,7 +492,6 @@ module.exports = {
  *  - fileWorkingDirectory
  *  - functionGlobalContext
  *  - functionExternalModules
- *  - globalFunctionTimeout
  *  - functionTimeout
  *  - nodeMessageBufferMaxLength
  *  - ui (for use with Node-RED Dashboard)
@@ -517,19 +518,7 @@ module.exports = {
     /** Allow the Function node to load additional npm modules directly */
     functionExternalModules: true,
 
-
-    /**
-     * The default timeout (in seconds) for all Function nodes.
-     * Individual nodes can set their own timeout value within their configuration.
-     */
-    globalFunctionTimeout: 0,
-
-    /**
-      * Default timeout, in seconds, for the Function node. 0 means no timeout is applied
-      * This value is applied when the node is first added to the workspace - any changes
-      * must then be made with the individual node configurations.
-      * To set a global timeout value, use `globalFunctionTimeout`
-     */
+    /** Default timeout, in seconds, for the Function node. 0 means no timeout is applied */
     functionTimeout: 0,
 
     /** The following property can be used to set predefined values in Global Context.

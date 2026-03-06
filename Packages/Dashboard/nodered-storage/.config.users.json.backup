@@ -1,12 +1,12 @@
 {
-    "_": {
+    "samuel": {
         "editor": {
             "view": {
                 "view-store-zoom": false,
                 "view-store-position": false,
-                "view-show-grid": true,
+                "view-show-grid": false,
                 "view-snap-grid": true,
-                "view-grid-size": 20,
+                "view-grid-size": "20",
                 "view-node-status": true,
                 "view-node-info-icon": true,
                 "view-node-show-label": true,
@@ -14,8 +14,48 @@
                 "view-show-welcome-tours": true
             },
             "tours": {
-                "welcome": "4.1.6"
+                "welcome": "4.1.4"
+            },
+            "dialog": {
+                "export": {
+                    "pretty": true,
+                    "json-view": true
+                }
             }
-        }
+        },
+        "git": {
+            "user": {
+                "name": "samuel",
+                "email": "samsam.deschamps@gmail.com"
+            },
+            "workflow": {
+                "mode": "auto"
+            }
+        },
+        "debug": {
+            "filter": "filterCurrent",
+            "filteredNodes": [
+                "771b38c2a972fd70",
+                "e4d1b42c46d66ab1",
+                "0ee27a4566c6128c",
+                "b1a46057926d4da8",
+                "29d3e42cb763180a",
+                "5b230b38d32d5063",
+                "2c53dad4d8344d7d",
+                "1d0c6dbfe86e6898",
+                "46a8cf86722e74c6",
+                "bebe09e7be869c8c",
+                "8f15c1d45db4a5ac",
+                "16770814f7f46184",
+                "d4d68c2630260bfc",
+                "f7dc6f5f97da5935",
+                "c3364af4d7356862",
+                "680112daaf8ec6b7",
+                "cce7ee6c570e755e",
+                "4b608e625915a1c6"
+            ]
+        },
+        "menu-menu-item-palette": true,
+        "menu-menu-item-sidebar": false
     }
 }

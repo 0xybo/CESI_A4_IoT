@@ -1,0 +1,8 @@
+{
+    "projects": {
+        "Node-red-project-1-Samuel": {
+            "credentialSecret": "PierreEstBeau123"
+        }
+    },
+    "activeProject": "Node-red-project-1-Samuel"
+}
