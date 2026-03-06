@@ -1,0 +1,812 @@
+[
+    {
+        "id": "06b1d32dae30de06",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "aff0befed29cde6d",
+        "type": "group",
+        "z": "06b1d32dae30de06",
+        "name": "Data flow",
+        "style": {
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "5594c94e04c3f10e",
+            "91767edb076710d1"
+        ],
+        "x": 8,
+        "y": 53,
+        "w": 1084,
+        "h": 489
+    },
+    {
+        "id": "d8396cf5f5930f6c",
+        "type": "group",
+        "z": "06b1d32dae30de06",
+        "name": "Choose security code and send to MQTT",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e33e0972f08998f4",
+            "df1454a2af090234",
+            "f7dc6f5f97da5935",
+            "d28042efbe850591",
+            "29d3e42cb763180a",
+            "2b9f8d3c462d8bd1",
+            "2c53dad4d8344d7d",
+            "0a991d08855cbe6f"
+        ],
+        "x": 14,
+        "y": 579,
+        "w": 752,
+        "h": 262
+    },
+    {
+        "id": "5594c94e04c3f10e",
+        "type": "group",
+        "z": "06b1d32dae30de06",
+        "g": "aff0befed29cde6d",
+        "name": "Serial input to MQTT",
+        "style": {
+            "label": true,
+            "stroke": "#ffC000",
+            "color": "#000000"
+        },
+        "nodes": [
+            "d285642a3c4fdd9b",
+            "71ffe0ba3425cd27",
+            "5b230b38d32d5063",
+            "6b82446a246c0d14",
+            "faa2b275c86d025d",
+            "3318f17bc2a67ebe",
+            "c810d0c0c13abc0a"
+        ],
+        "x": 34,
+        "y": 79,
+        "w": 1032,
+        "h": 202
+    },
+    {
+        "id": "91767edb076710d1",
+        "type": "group",
+        "z": "06b1d32dae30de06",
+        "g": "aff0befed29cde6d",
+        "name": "MQTT data flow",
+        "style": {
+            "label": true,
+            "stroke": "#6f2fa0",
+            "color": "#000000"
+        },
+        "nodes": [
+            "8c3c24db95735d73",
+            "680112daaf8ec6b7",
+            "b87de3921a2f7f75",
+            "bf80ab8709dffdb1",
+            "e15b1e4e8c8d7471",
+            "9d7b75e436538292",
+            "9e14992251c5ed7f",
+            "e3298b6303719189"
+        ],
+        "x": 34,
+        "y": 319,
+        "w": 872,
+        "h": 197
+    },
+    {
+        "id": "4b6faeced9501920",
+        "type": "serial-port",
+        "name": "Arduino",
+        "serialport": "/dev/ttyACM0",
+        "serialbaud": "115200",
+        "databits": 8,
+        "parity": "none",
+        "stopbits": 1,
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "\\n",
+        "responsetimeout": 10000
+    },
+    {
+        "id": "d2573c310d00950c",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a73854e02ac7bb4b",
+        "type": "ui_tab",
+        "name": "Test",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "2196860e0d2e744f",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "478dc27cf3cfa3fc",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "a73854e02ac7bb4b",
+        "order": 1,
+        "disp": true,
+        "width": 30,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d285642a3c4fdd9b",
+        "type": "serial in",
+        "z": "06b1d32dae30de06",
+        "g": "5594c94e04c3f10e",
+        "name": "",
+        "serial": "4b6faeced9501920",
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "6b82446a246c0d14"
+            ]
+        ]
+    },
+    {
+        "id": "71ffe0ba3425cd27",
+        "type": "json",
+        "z": "06b1d32dae30de06",
+        "g": "5594c94e04c3f10e",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 550,
+        "y": 180,
+        "wires": [
+            [
+                "c810d0c0c13abc0a"
+            ]
+        ]
+    },
+    {
+        "id": "5b230b38d32d5063",
+        "type": "debug",
+        "z": "06b1d32dae30de06",
+        "g": "5594c94e04c3f10e",
+        "name": "Serial -> MQTT",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "6b82446a246c0d14",
+        "type": "function",
+        "z": "06b1d32dae30de06",
+        "g": "5594c94e04c3f10e",
+        "name": "trim",
+        "func": "msg.payload = msg.payload.trim()\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "71ffe0ba3425cd27"
+            ]
+        ]
+    },
+    {
+        "id": "8c3c24db95735d73",
+        "type": "mqtt in",
+        "z": "06b1d32dae30de06",
+        "g": "91767edb076710d1",
+        "name": "",
+        "topic": "Node RED",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "d2573c310d00950c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 360,
+        "wires": [
+            [
+                "680112daaf8ec6b7",
+                "e15b1e4e8c8d7471",
+                "9e14992251c5ed7f"
+            ]
+        ]
+    },
+    {
+        "id": "faa2b275c86d025d",
+        "type": "mqtt out",
+        "z": "06b1d32dae30de06",
+        "g": "5594c94e04c3f10e",
+        "name": "",
+        "topic": "Node RED",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d2573c310d00950c",
+        "x": 950,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "680112daaf8ec6b7",
+        "type": "debug",
+        "z": "06b1d32dae30de06",
+        "g": "91767edb076710d1",
+        "name": "MQTT",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 310,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "e33e0972f08998f4",
+        "type": "ui_template",
+        "z": "06b1d32dae30de06",
+        "g": "d8396cf5f5930f6c",
+        "group": "478dc27cf3cfa3fc",
+        "name": "Security code UI/UX",
+        "order": 1,
+        "width": "7",
+        "height": "6",
+        "format": "<style>\n    :root {\n        --brutal-green: #00FF41;\n        --brutal-red: #FF5D5D;\n        --brutal-shadow: #000000;\n        --brutal-border: 4px solid #000000;\n        --brutal-disabled: #A0A0A0;\n    }\n\n    .brutal-container {\n        padding: 20px;\n        background-color: #ffffff;\n        font-family: 'Arial Black', sans-serif;\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        gap: 20px;\n    }\n\n    .brutal-input {\n        font-size: 32px;\n        font-weight: 900;\n        letter-spacing: 5px;\n        text-align: center;\n        border: var(--brutal-border);\n        border-radius: 0px;\n        padding: 15px;\n        width: 180px;\n        background-color: var(--brutal-red);\n        color: black;\n        box-shadow: 8px 8px 0px var(--brutal-shadow);\n        outline: none;\n        transition: all 0.2s;\n    }\n\n    .brutal-input.valid {\n        background-color: var(--brutal-green);\n    }\n\n    .brutal-btn {\n        width: 100%;\n        max-width: 214px;\n        padding: 15px;\n        font-family: 'Arial Black', sans-serif;\n        font-size: 18px;\n        text-transform: uppercase;\n        border: var(--brutal-border);\n        background-color: var(--brutal-green);\n        box-shadow: 6px 6px 0px var(--brutal-shadow);\n        cursor: pointer;\n        transition: all 0.1s;\n    }\n\n    .brutal-btn:active:not([disabled]) {\n        transform: translate(3px, 3px);\n        box-shadow: 2px 2px 0px var(--brutal-shadow);\n    }\n\n    .brutal-btn[disabled] {\n        background-color: var(--brutal-disabled);\n        cursor: not-allowed;\n        box-shadow: none;\n        transform: none;\n        opacity: 0.6;\n    }\n\n    .brutal-status {\n        margin-top: 10px;\n        padding: 8px 15px;\n        background: black;\n        color: var(--brutal-green);\n        border: 2px solid black;\n        font-size: 14px;\n        text-transform: uppercase;\n    }\n\n    .shake {\n        animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both;\n    }\n\n    @keyframes shake {\n        10%, 90% { transform: translate3d(-1px, 0, 0); }\n        20%, 80% { transform: translate3d(2px, 0, 0); }\n        30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }\n        40%, 60% { transform: translate3d(4px, 0, 0); }\n    }\n</style>\n\n<div class=\"brutal-container\">\n    <div style=\"width: 100%; text-align: center;\">\n        <label style=\"display:block; margin-bottom:10px; font-weight:900;\">MQTT PIN CONTROL</label>\n        <input type=\"text\" \n               id=\"brutal-input-id\"\n               class=\"brutal-input\" \n               ng-class=\"{'valid': val.length === 4}\"\n               ng-model=\"val\" \n               ng-change=\"handleInput()\"\n               placeholder=\"0000\"\n               maxlength=\"4\"\n               inputmode=\"numeric\">\n    </div>\n\n    <button class=\"brutal-btn\" \n            ng-disabled=\"val.length !== 4\" \n            ng-click=\"submitData()\">\n        ENVOYER A L'ALARME\n    </button>\n\n    <div class=\"brutal-status\" ng-if=\"lastSent\">\n        CODE ACTIF: {{lastSent}}\n    </div>\n</div>\n\n<script>\n    (function(scope) {\n        scope.val = '';\n        scope.lastSent = '';\n        const inputElement = document.getElementById('brutal-input-id');\n\n        scope.handleInput = function() {\n            if (/[^0-9]/.test(scope.val)) {\n                inputElement.classList.add('shake');\n                setTimeout(() => inputElement.classList.remove('shake'), 200);\n            }\n            scope.val = scope.val.replace(/[^0-9]/g, '');\n        };\n\n        scope.submitData = function() {\n            if (scope.val.length === 4) {\n                scope.lastSent = scope.val;\n                scope.send({payload: scope.val});\n            }\n        };\n    })(scope);\n</script>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 140,
+        "y": 620,
+        "wires": [
+            [
+                "f7dc6f5f97da5935",
+                "df1454a2af090234"
+            ]
+        ]
+    },
+    {
+        "id": "df1454a2af090234",
+        "type": "mqtt out",
+        "z": "06b1d32dae30de06",
+        "g": "d8396cf5f5930f6c",
+        "name": "",
+        "topic": "Security combination",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d2573c310d00950c",
+        "x": 440,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "f7dc6f5f97da5935",
+        "type": "debug",
+        "z": "06b1d32dae30de06",
+        "g": "d8396cf5f5930f6c",
+        "name": "UI > Combination",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "f3b9f85bc1a87120",
+        "type": "ui_template",
+        "z": "06b1d32dae30de06",
+        "group": "478dc27cf3cfa3fc",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    /* 1. FOND DE PAGE AVEC MOTIF RAYÉ (PATTERN) */\n    #dashboard-display {\n        background: #f0f0f0 !important;\n        background-image: repeating-linear-gradient(45deg, #e5e5e5 0, #e5e5e5 2px, transparent 0, transparent 50%) !important;\n        background-size: 15px 15px !important;\n        font-family: 'Arial Black', sans-serif !important;\n    }\n\n    /* 2. BARRE DE NAVIGATION ARC-EN-CIEL BRUTALE */\n    .md-toolbar-tools {\n        background-color: #000 !important;\n        border-bottom: 8px solid #FF00E4 !important; /* Rose Neon */\n    }\n\n    /* 3. CARTES (GROUPS) AVEC EFFET DE PERSPECTIVE */\n    .nr-dashboard-group {\n        background-color: #fff !important;\n        border: 5px solid #000 !important;\n        box-shadow: 12px 12px 0px #000 !important;\n        border-radius: 0px !important;\n        margin: 20px !important;\n        transition: all 0.2s ease;\n    }\n\n    .nr-dashboard-group:hover {\n        transform: translate(-4px, -4px);\n        box-shadow: 16px 16px 0px #FF00E4 !important; /* Change de couleur au survol */\n    }\n\n    /* 4. TITRES DES GROUPES (LOOK TICKET DE CAISSE / GLITCH) */\n    .nr-dashboard-group-title {\n        color: #fff !important;\n        font-weight: 900 !important;\n        letter-spacing: 2px;\n        text-transform: uppercase !important;\n        background: linear-gradient(90deg, #000 70%, #FF00E4 30%) !important;\n        padding: 12px !important;\n        border-bottom: 5px solid #000 !important;\n    }\n\n    /* 5. BOUTONS ULTRA-PEPS (CYAN / MAGENTA) */\n    .md-button.nr-dashboard-button {\n        background-color: #00F0FF !important; /* Cyan */\n        color: #000 !important;\n        border: 4px solid #000 !important;\n        box-shadow: 5px 5px 0px #000 !important;\n        border-radius: 0px !important;\n        text-transform: uppercase !important;\n        font-weight: 900 !important;\n        margin: 8px !important;\n    }\n\n    .md-button.nr-dashboard-button:hover {\n        background-color: #FF00E4 !important; /* Switch Magenta */\n        color: #fff !important;\n        transform: scale(1.05) rotate(-1deg);\n    }\n\n    /* 6. LABELS ET TEXTES (LOOK SURLIGNÉ) */\n    .nr-dashboard-label {\n        background-color: #FEFF00 !important; /* Jaune Fluos */\n        color: #000 !important;\n        display: inline-block !important;\n        padding: 2px 8px !important;\n        transform: rotate(-1deg);\n        border: 2px solid #000 !important;\n    }\n\n    /* 7. LES SWITCHES ET SLIDERS */\n    md-switch .md-bar {\n        background-color: #000 !important;\n    }\n    md-switch.md-checked .md-thumb {\n        background-color: #00FF41 !important;\n        border: 3px solid #000 !important;\n    }\n\n    /* ANIMATION DE FLASH POUR LE CÔTÉ VIVANT */\n    @keyframes blink {\n        0% { opacity: 1; }\n        50% { opacity: 0.8; }\n        100% { opacity: 1; }\n    }\n    \n    .nr-dashboard-group-title {\n        animation: blink 2s infinite;\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 860,
+        "y": 20,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "010ac86979a1b4bf",
+        "type": "comment",
+        "z": "06b1d32dae30de06",
+        "name": "PayloadType",
+        "info": "PayloadType {\n  EDGE_HEARTBEAT = 1, // Heartbeat message sent periodically to indicate that the system is alive, with the current alarm state included in the payload data\n  MOTION_STATE   = 2, // Message sent when motion is detected, with the motion state (e.g., detected or not detected) included in the payload data\n  CONFIGURATION  = 3, // TODO: Add support for configuration messages (e.g., changing the secret combination, time range rules, etc.)\n};",
+        "x": 130,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "b87de3921a2f7f75",
+        "type": "ui_text",
+        "z": "06b1d32dae30de06",
+        "g": "91767edb076710d1",
+        "group": "478dc27cf3cfa3fc",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Etat",
+        "format": "{{msg.payload.stateString}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 830,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "bf80ab8709dffdb1",
+        "type": "function",
+        "z": "06b1d32dae30de06",
+        "g": "91767edb076710d1",
+        "name": "Set alarm state value and text",
+        "func": "// Translate data to alarm state and alarm display string\n\nlet state = msg.payload?.data\n\nconst stateToDisplayString = {\n    0: \"Inactif\",\n    1: \"Surveillance\",\n    2: \"Déclenché\",\n    3: \"Désarmé\",\n    4: \"Désarmement raté\",\n    5: \"Configuration\",\n};\n\nif (state in stateToDisplayString) {\n    msg.payload.state = state;\n    msg.payload.stateString = stateToDisplayString[state];\n    return msg;\n} else { // Unknown state\n    msg.payload.state = -1;\n    msg.payload.stateString = \"Inconnu\";\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 440,
+        "wires": [
+            [
+                "b87de3921a2f7f75"
+            ]
+        ]
+    },
+    {
+        "id": "e15b1e4e8c8d7471",
+        "type": "switch",
+        "z": "06b1d32dae30de06",
+        "g": "91767edb076710d1",
+        "name": "PayloadType",
+        "property": "payload.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 330,
+        "y": 460,
+        "wires": [
+            [
+                "bf80ab8709dffdb1"
+            ],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "47d09ffd6e43db37",
+        "type": "comment",
+        "z": "06b1d32dae30de06",
+        "name": "AlarmState",
+        "info": "enum class AlarmState {\n  INACTIVE      = 0, // No alarm and time window is not monitored\n  MONITORING    = 1, // No alarm but time window is monitored, waiting for potential motion detection\n  TRIGGERED     = 2, // Alarm triggered due to motion detection, waiting for user to disarm\n  DISARMED      = 3, // Alarm was triggered but user successfully disarmed it\n  FAILED_DISARM = 4, // Alarm was triggered and user failed to disarm it within the allowed time or number of tries\n  CONFIGURATION = 5  // State used for configuration mode during the first setup (e.g., setting time, changing combination, etc.)\n};",
+        "x": 320,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "9d7b75e436538292",
+        "type": "ui_text",
+        "z": "06b1d32dae30de06",
+        "g": "91767edb076710d1",
+        "group": "478dc27cf3cfa3fc",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Dernier message le",
+        "format": "{{msg.payload.nodeTimeString}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3318f17bc2a67ebe",
+        "type": "inject",
+        "z": "06b1d32dae30de06",
+        "g": "5594c94e04c3f10e",
+        "name": "Fake Heartbeat",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "v": "iso",
+                "vt": "date"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":1,\"seq\":127,\"ts\":1772821263,\"type\":1,\"data\":5}",
+        "payloadType": "json",
+        "x": 720,
+        "y": 240,
+        "wires": [
+            [
+                "faa2b275c86d025d"
+            ]
+        ]
+    },
+    {
+        "id": "9e14992251c5ed7f",
+        "type": "switch",
+        "z": "06b1d32dae30de06",
+        "g": "91767edb076710d1",
+        "name": "nodeTime",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "nodeTime",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 400,
+        "wires": [
+            [
+                "e3298b6303719189"
+            ]
+        ]
+    },
+    {
+        "id": "c810d0c0c13abc0a",
+        "type": "function",
+        "z": "06b1d32dae30de06",
+        "g": "5594c94e04c3f10e",
+        "name": "Node timestamp",
+        "func": "msg.payload.nodeTime = new Date();\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 180,
+        "wires": [
+            [
+                "faa2b275c86d025d",
+                "5b230b38d32d5063"
+            ]
+        ]
+    },
+    {
+        "id": "e3298b6303719189",
+        "type": "function",
+        "z": "06b1d32dae30de06",
+        "g": "91767edb076710d1",
+        "name": "Time format",
+        "func": "const mqttReceivedAt = new Date(msg.payload.nodeTime);\nmsg.payload.nodeTimeString = mqttReceivedAt.toLocaleString()\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 400,
+        "wires": [
+            [
+                "9d7b75e436538292"
+            ]
+        ]
+    },
+    {
+        "id": "d28042efbe850591",
+        "type": "mqtt in",
+        "z": "06b1d32dae30de06",
+        "g": "d8396cf5f5930f6c",
+        "name": "",
+        "topic": "Security combination",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "d2573c310d00950c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 740,
+        "wires": [
+            [
+                "29d3e42cb763180a",
+                "2b9f8d3c462d8bd1"
+            ]
+        ]
+    },
+    {
+        "id": "29d3e42cb763180a",
+        "type": "debug",
+        "z": "06b1d32dae30de06",
+        "g": "d8396cf5f5930f6c",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "2b9f8d3c462d8bd1",
+        "type": "function",
+        "z": "06b1d32dae30de06",
+        "g": "d8396cf5f5930f6c",
+        "name": "Combination Serial",
+        "func": "return {\n    payload: JSON.stringify(\n        {\n            id: 1,\n            ts: Date.now(),\n            seq: 0,\n            type: 3, // CONFIGURATION\n            data: \"1\" + msg.payload\n        }\n    )\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 740,
+        "wires": [
+            [
+                "2c53dad4d8344d7d",
+                "0a991d08855cbe6f"
+            ]
+        ]
+    },
+    {
+        "id": "2c53dad4d8344d7d",
+        "type": "debug",
+        "z": "06b1d32dae30de06",
+        "g": "d8396cf5f5930f6c",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "0a991d08855cbe6f",
+        "type": "serial out",
+        "z": "06b1d32dae30de06",
+        "g": "d8396cf5f5930f6c",
+        "name": "",
+        "serial": "4b6faeced9501920",
+        "x": 660,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "6050c5da1cf05512",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-serialport": "2.0.3",
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
