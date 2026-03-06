@@ -1,0 +1,34 @@
+name: Update repository metadata
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  metadata: write
+
+jobs:
+  update-metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update description and topics
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh repo edit ${{ github.repository }} \
+            --description "Système IoT d'éclairage intelligent : Arduino Uno R4 WiFi, réseau ZigBee, stack Docker (Node-RED, InfluxDB, Grafana) — Projet CESI A4" \
+            --add-topic iot \
+            --add-topic arduino \
+            --add-topic zigbee \
+            --add-topic node-red \
+            --add-topic influxdb \
+            --add-topic grafana \
+            --add-topic docker \
+            --add-topic smart-lighting \
+            --add-topic embedded \
+            --add-topic platformio \
+            --add-topic cpp \
+            --add-topic cesi
