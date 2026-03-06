@@ -35,7 +35,7 @@ void LightService::loop(int index) {
 
 void LightService::updateLed() {
     int minTemperature = 20;
-    int maxTemperature = 60;
+    int maxTemperature = 80;
 
     int minBrightness = 20;
     int maxBrightness = 80;
